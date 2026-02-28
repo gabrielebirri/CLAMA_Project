@@ -1,4 +1,4 @@
-# CLAMA_Project
+# CLAMA Project
 
 **Dataset used:** https://www.kaggle.com/datasets/hasnainjaved/melanoma-skin-cancer-dataset-of-10000-images
 
