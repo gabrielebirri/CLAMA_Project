@@ -1,6 +1,10 @@
 # CLAMA Project
 Computer-Leveraged Analysis for Melanoma Assessment
 
+<p align="left">
+  <img src="logo.png" width="300" title="CLAMA Logo">
+</p>
+
 **Dataset used:** https://www.kaggle.com/datasets/hasnainjaved/melanoma-skin-cancer-dataset-of-10000-images
 
 ## Abstract
