@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" width="500" title="CLAMA Logo">
+  <img src="logo.png" width="400" title="CLAMA Logo">
 </p>
 
 
