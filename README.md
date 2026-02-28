@@ -1,8 +1,5 @@
-# CLAMA Project
-**Computer-Leveraged Analysis for Melanoma Assessment**
-
-<p align="left">
-  <img src="logo.png" width="300" title="CLAMA Logo">
+<p align="center">
+  <img src="logo.png" width="500" title="CLAMA Logo">
 </p>
 
 
