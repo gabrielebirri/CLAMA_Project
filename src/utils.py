@@ -109,5 +109,5 @@ def download_dataset(IN_COLAB):
         train_path = os.path.join(pre, "train")
         test_path = os.path.join(pre, "test")
         
-        return train_path, test_path
+    return train_path, test_path
 
