@@ -1,7 +1,4 @@
-<p align="center">
-  <img src="logo.png" width="400" title="CLAMA Logo">
-</p>
-
+#Advanced Dermatological Assistance System
 
 ### Disclaimer: this is a university project and it's NOT intended to be a diagnostic device.
 
@@ -13,3 +10,5 @@ The architectures are adapted for binary classification by substituting the orig
 The study utilizes a dataset of approximately 10,000 dermoscopic images, sourced from a publicly available repository and balanced between benign and malignant classes. The performance of the respective architectures is rigorously quantified using standard clinical evaluation metrics, providing a comprehensive perspective on the suitability of different CNN backbones for computer-aided diagnosis in dermatology.  
 
 **Dataset used:** https://www.kaggle.com/datasets/hasnainjaved/melanoma-skin-cancer-dataset-of-10000-images
+
+In memory of Daniele Clama
