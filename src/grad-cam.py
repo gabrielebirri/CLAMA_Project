@@ -1,5 +1,5 @@
-from utilities import build_densenet, build_efficientnet, build_resnet
-from utilities import im_show, imagenet_mean, imagenet_std
+from src.utils import build_densenet, build_efficientnet, build_resnet
+from src.utils import im_show, imagenet_mean, imagenet_std
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
