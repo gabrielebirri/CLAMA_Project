@@ -16,11 +16,15 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 
 #-----------------------------------#
+# Mean and standard deviation for imagenet
+
+imagenet_mean = [0.485, 0.456, 0.406]   # mean used in model training
+imagenet_std = [0.229, 0.224, 0.225]    # standard deviation used in model training
+
+#-----------------------------------#
 # This function helps to plot a normalized image
 
 def im_show(tensor):
-    imagenet_mean = [0.485, 0.456, 0.406]   # mean used in model training
-    imagenet_std = [0.229, 0.224, 0.225]    # standard deviation used in model training
     img = tensor.squeeze(0).cpu().detach().numpy().transpose((1, 2, 0))
     img = np.clip(img * imagenet_std + imagenet_mean, 0, 1)
     plt.imshow(img)
