@@ -1,0 +1,19 @@
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# venv
+venv/
+env/
+.env/
+
+# pytorch
+*.pth
+*.h5
