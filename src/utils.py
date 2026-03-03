@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 import copy
+import shutil
 
 # PyTorch
 import torch
@@ -89,4 +90,24 @@ def build_efficientnet():
         nn.Linear(in_features, 1),
     )
     return model
+
+
+#-----------------------------------#
+# This functions build the various models
+def download_dataset(IN_COLAB):
+    if IN_COLAB:
+        print("Detected environment: Colab")
+        # Downloading the dataset from Kaggle
+        root = kagglehub.dataset_download("hasnainjaved/melanoma-skin-cancer-dataset-of-10000-images")
+        train_path = '/kaggle/input/melanoma-skin-cancer-dataset-of-10000-images/melanoma_cancer_dataset/train'
+        test_path = '/kaggle/input/melanoma-skin-cancer-dataset-of-10000-images/melanoma_cancer_dataset/test'
+
+    else:
+        print("Detected environment: Local")
+        root = kagglehub.dataset_download("hasnainjaved/melanoma-skin-cancer-dataset-of-10000-images")
+        pre = os.path.join(root, "melanoma_cancer_dataset")
+        train_path = os.path.join(pre, "train")
+        test_path = os.path.join(pre, "test")
+        
+        return train_path, test_path
 

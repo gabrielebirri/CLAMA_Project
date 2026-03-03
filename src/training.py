@@ -17,7 +17,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 
 #-----------------------------------#
-# This file contains the training function for the two phases of the praining pipeline
+# This file contains the training function for the two phases of the training pipeline
 
 # TRAINING LOOP
 def training_loop(model, train_loader, val_loader, epochs, threshold, criterion, optimizer, device):
