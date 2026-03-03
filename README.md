@@ -1,4 +1,4 @@
-#Advanced Dermatological Assistance System
+# Advanced Dermatological Assistance System
 
 ### Disclaimer: this is a university project and it's NOT intended to be a diagnostic device.
 
