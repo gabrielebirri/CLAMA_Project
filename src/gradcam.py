@@ -32,10 +32,7 @@ def grad_cam_setup(load_path, device):
 #-----------------------------------#
 # This function shows the grad-cam onto a selected image
 
-def show_grad_cam(test_dataset, cam, device):
-
-
-    image_index = 14    # This index is used to choose the target image
+def show_grad_cam(image_index, test_dataset, cam, device):
 
     cam_tensor, cam_label = test_dataset[image_index]
     cam_tensor = cam_tensor.to(device)
