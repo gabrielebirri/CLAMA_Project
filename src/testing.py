@@ -15,9 +15,8 @@ import torchvision
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 
-def testing_model(test_model, test_loader, criterion, device):
+def testing_model(test_model, test_loader, threshold, criterion, device):
     test_model.eval()
-    threshold = 0.4
 
     test_loss = 0
     correct = 0

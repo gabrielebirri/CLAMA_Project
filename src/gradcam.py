@@ -18,7 +18,7 @@ def grad_cam_setup(load_path, device):
 
     # Defining model to be used in grad-CAM
     cam_model = build_efficientnet()
-    cam_model.load_state_dict(torch.load(load_path))
+    cam_model.load_state_dict(torch.load(load_path, map_location=device))
     cam_model.to(device)
     print(f"CAM model: {load_path}")        # Here the same path as the test load is used
 
