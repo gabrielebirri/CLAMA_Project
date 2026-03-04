@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 import copy
 import shutil
 
+
 # PyTorch
 import torch
 from torch import nn
@@ -93,7 +94,7 @@ def build_efficientnet():
 
 
 #-----------------------------------#
-# This functions build the various models
+# This function download the dataset, discriminating between local environment and cloud
 def download_dataset(IN_COLAB):
     if IN_COLAB:
         print("Detected environment: Colab")
@@ -110,4 +111,21 @@ def download_dataset(IN_COLAB):
         test_path = os.path.join(pre, "test")
         
     return train_path, test_path
+
+#-----------------------------------#
+# This function helps choosing the model and building it
+def build_chosen_model(model_name):
+    # Downloading and preparing the model
+    if model_name == "DenseNet121":
+        model = build_densenet()
+        print(f"Model: {model_name} \nStatus: Loaded correctly")
+
+    elif model_name == "ResNet50":
+        model = build_resnet()
+        print(f"Model: {model_name} \nStatus: Loaded correctly")
+
+    elif model_name == "EfficientNet":
+        model = build_efficientnet()
+        print(f"Model: {model_name}_v2_s \nStatus: Loaded correctly")
+    return model
 
