@@ -15,6 +15,8 @@ import torchvision
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 
+#-----------------------------------#
+# This function is used to test the model on the test dataset
 def testing_model(test_model, test_loader, threshold, criterion, device):
     test_model.eval()
 
@@ -56,3 +58,14 @@ def testing_model(test_model, test_loader, threshold, criterion, device):
 
     print("Model tested")
     return true_positives, true_negatives, false_positives, false_negatives, all_preds, all_labels, test_loss, correct, total
+
+
+#-----------------------------------#
+# This function is used to inference the model given an image
+def inference(model, image, sensitivity):
+    pred = model(image)
+    prob = torch.sigmoid(pred)
+    if prob > sensitivity:
+        print("Model prediction: Malignant")
+    else:
+        print("Model prediction: Benign")
