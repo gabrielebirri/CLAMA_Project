@@ -1,0 +1,15 @@
+# Core Utilities
+numpy>=1.22.0,<1.27.0
+matplotlib>=3.5.0
+tqdm>=4.64.0
+kagglehub>=0.2.0
+
+# Machine Learning and Scikit-learn
+scikit-learn>=1.0.0
+
+# PyTorch Ecosystem (versions compatible with Python 3.10)
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Grad-CAM
+grad-cam>=1.4.0

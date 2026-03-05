@@ -11,3 +11,44 @@ The study utilizes a dataset of approximately 10,000 dermoscopic images, sourced
 
 **Dataset used:** https://www.kaggle.com/datasets/hasnainjaved/melanoma-skin-cancer-dataset-of-10000-images
 
+## How to run the code
+The philosophy behind this project is that cancer fight is indeed a struggle that we, as humanity, need to endure together, and therefore this project is designed to be open source, in order for everybody to be able to contribute with knowledge and potentally game changing ideas. Moreover, given the fact that it is a medical environment there is the need for the pipeline to be accessible to be inspected in order to find potentially critical flaws. In this section an explanation of how to run the code will be given.
+
+The pipeline is designed to be hybrid, in order to be able to run it both locally and on the cloud on Google Colab.
+
+**HOW TO RUN THE CODE LOCALLY**
+
+### 1. Check Python version
+This project has been designed to be able to run on Python 3.10.19. If you have another version installed some libraries may not work. To check for the Python version run the following code in terminal:
+
+<pre>
+python --version
+</pre>
+
+### 2. Create and activate a virtual environment
+It's best practice to create a virtual environment to avoid conflicts between libraries. The best way to do so is by downloading **Anaconda** and create an environment via conda. When you have created the environment (example: my_env), remember to activate it:
+
+<pre>
+conda activare my_env
+</pre>
+
+### 3. Install required dependancies
+To install required libraries, run the following line in the terminal, it will automatically download and install all you need in the vortual environment:
+
+<pre>
+pip install -r requirements.txt
+</pre>
+
+### Run the pipeline
+This project is built with simplicity at its core. The entire workflow is managed through a Jupyter Notebook for an intuitive experience.To execute the training and testing pipeline, simply open **Pipeline_Driver.ipynb** and follow the step-by-step instructions provided within the cells.
+
+**HOW TO RUN THE CODE ON COLAB**
+The workflow to run the pipeline on Google Colab is much simpler and automated.
+
+### 1. Open Pipeline_Driver.ipynb
+
+### 2. Click on the Colab badge above the title
+
+### 3. Run the notebook as locally
+
+NOTE: sometimes Colab gives an error after downloading the dataset. If this happens wait for a minute and run the downloading cell again. This happens because the cache has still to update, therefore the following cells of the notebook don't find the dataset material yet
