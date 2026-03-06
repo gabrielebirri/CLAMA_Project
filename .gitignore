@@ -4,6 +4,7 @@
 *.code-workspace
 *.jpg
 *.png
+*.jpeg
 
 # Python
 __pycache__/

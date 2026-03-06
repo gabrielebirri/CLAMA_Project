@@ -61,7 +61,7 @@ while True:
         print("Please enter a valid name: ")
 """
 
-name = "EfficientNet"
+name = "DenseNet121"
 model = build_chosen_model(name)
 
 # Defining paths
@@ -72,7 +72,7 @@ models_path.mkdir(parents=True, exist_ok=True)
 
 # model_name = input("Please enter the name of the model:")
 
-model_name = "effnet_1.pth"
+model_name = "densenet_best_5.pth"
 load_path = models_path / model_name
 
 

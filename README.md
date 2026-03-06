@@ -53,3 +53,38 @@ The workflow to run the pipeline on Google Colab is much simpler and automated.
 ### 3. Run the notebook as locally
 
 NOTE: sometimes Colab gives an error after downloading the dataset. If this happens wait for a minute and run the downloading cell again. This happens because the cache has still to update, therefore the following cells of the notebook don't find the dataset material yet
+
+## How to run the inference script
+
+An easy to use inference script has been developed in order to allow the user to easily test the model on a single image.
+The following steps will guide you through the process of running the inference script:
+
+### 1. Check Python version
+This project has been designed to be able to run on Python 3.10.19. If you have another version installed some libraries may not work. To check for the Python version run the following code in terminal:
+
+<pre>
+python --version
+</pre>
+
+### 2. Create and activate a virtual environment
+It's best practice to create a virtual environment to avoid conflicts between libraries. The best way to do so is by downloading **Anaconda** and create an environment via conda. When you have created the environment (example: my_env), remember to activate it:
+
+<pre>
+conda activare my_env
+</pre>
+
+### 3. Install required dependancies
+To install required libraries, run the following line in the terminal, it will automatically download and install all you need in the vortual environment:
+
+<pre>
+pip install -r requirements.txt
+</pre>
+
+### 4. Run the inference script
+To run the script and obtaining both the prediction and the grad-CAM, run the following command in the terminal (be sure to be in the right folder, the image is in the same folder as the script and that the model you want to use is in the same folder):
+
+<pre>
+python inference_script.py
+</pre>
+
+**NOTE:** If you want to try the inference script you need to rename your image into 'test_image.jpg' and place it in the same folder as the script.
