@@ -19,6 +19,7 @@ from pathlib import Path
 from src.testing import inference
 from src.utils import build_chosen_model
 from src.gradcam import grad_cam_setup, show_grad_cam
+from src.utils import valid_models
 
 
 # Setting device agnostic code
@@ -50,25 +51,31 @@ image = image.to(device)
 print("Please choose one of the following model types:")
 print("DenseNet121, EfficientNet, ResNet50")
 
-
+"""
 while True:
     name = input()
 
-    if name == "DenseNet121" or "EfficientNet" or "ResNet50":
+    if name in valid_models:
         break
     else:
         print("Please enter a valid name: ")
+"""
 
+name = "EfficientNet"
 model = build_chosen_model(name)
-
 
 # Defining paths
 
 models_path = Path('./models')
 models_path.mkdir(parents=True, exist_ok=True)
 
-model_name = input("Please enter the name of the model:")
+
+# model_name = input("Please enter the name of the model:")
+
+model_name = "effnet_1.pth"
 load_path = models_path / model_name
+
+
 
 # Loading weights
 
@@ -79,5 +86,16 @@ print(f"current model: {load_path}")
 # inference
 
 sensitivity = 0.4
-inference(model, image, sensitivity)
+prediction = inference(model, image, sensitivity)
 
+# Grad-CAM
+# This section implements the grad cam for the choosen image
+from src.gradcam import grad_cam_setup, show_grad_cam
+
+cam = grad_cam_setup(load_path, device)
+
+# Wraps the single image in a dummy dataset-like list to match show_grad_cam's expected input format
+dummy_dataset = [(image.squeeze(0), 0)]
+image_index = 0
+
+show_grad_cam(image_index, dummy_dataset, cam, device, prediction=prediction)

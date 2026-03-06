@@ -18,6 +18,10 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 
 #-----------------------------------#
+# List of valid models in this project
+valid_models = {"DenseNet121", "EfficientNet", "ResNet50"}
+
+#-----------------------------------#
 # Mean and standard deviation for imagenet
 
 imagenet_mean = [0.485, 0.456, 0.406]   # mean used in model training
