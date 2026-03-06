@@ -32,7 +32,7 @@ def grad_cam_setup(load_path, device):
 #-----------------------------------#
 # This function shows the grad-cam onto a selected image
 
-def show_grad_cam(image_index, test_dataset, cam, device):
+def show_grad_cam(image_index, test_dataset, cam, device, prediction=None):
 
     cam_tensor, cam_label = test_dataset[image_index]
     cam_tensor = cam_tensor.to(device)
@@ -67,5 +67,8 @@ def show_grad_cam(image_index, test_dataset, cam, device):
     plt.subplot(1,2,2)
     plt.imshow(visualization)
     plt.axis('off')
-    plt.title('Grad-CAM')
+    if prediction:
+        plt.title(f'Grad-CAM\nPrediction: {prediction}')
+    else:
+        plt.title('Grad-CAM')
     plt.show()

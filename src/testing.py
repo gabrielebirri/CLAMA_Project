@@ -66,6 +66,9 @@ def inference(model, image, sensitivity):
     pred = model(image)
     prob = torch.sigmoid(pred)
     if prob > sensitivity:
-        print("Model prediction: Malignant")
+        prediction = "Malignant"
     else:
-        print("Model prediction: Benign")
+        prediction = "Benign"
+    
+    print(f"Model prediction: {prediction}")
+    return prediction
