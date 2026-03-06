@@ -11,18 +11,32 @@ from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 from pytorch_grad_cam.utils.image import show_cam_on_image
 
 #-----------------------------------#
-# This function sets up the grad cam to be used by a choosen model
+# Set up Grad-CAM for a specified model.
+# This function loads a pre-trained EfficientNet model from the given path,
+# assigns it to the specified device (CPU/GPU), and attaches a Grad-CAM hook 
+# to its final convolutional layer to generate class activation maps.
 
 def grad_cam_setup(load_path, device):
     # Setup of the grad-CAM
 
-    # Defining model to be used in grad-CAM
-    cam_model = build_efficientnet()
+    load_path_str = str(load_path).lower()
+    
+    # Infer the correct model and target layer based on the filename
+    if "densenet" in load_path_str:
+        cam_model = build_densenet()
+        target_layers = [cam_model.features[-1]]
+    elif "resnet" in load_path_str:
+        cam_model = build_resnet()
+        target_layers = [cam_model.layer4[-1]]
+    else: 
+        cam_model = build_efficientnet()
+        target_layers = [cam_model.features[-1]]
+
+    # Load weights
     cam_model.load_state_dict(torch.load(load_path, map_location=device))
     cam_model.to(device)
+    cam_model.eval()
     print(f"CAM model: {load_path}")        # Here the same path as the test load is used
-
-    target_layers = [cam_model.features[-1]]
 
     cam = GradCAM(model=cam_model, target_layers=target_layers)
     print("CAM set up correctly")
@@ -30,7 +44,11 @@ def grad_cam_setup(load_path, device):
 
 
 #-----------------------------------#
-# This function shows the grad-cam onto a selected image
+# Overlay the Grad-CAM heatmap onto a selected image and display it.
+# This function processes a specific image from the dataset, computes its 
+# Grad-CAM heatmap using the provided `cam` object (targeting the 'Benign' class), 
+# and displays a side-by-side matplotlib comparison between the original image 
+# and the Grad-CAM visualization. It can optionally display the model's prediction.
 
 def show_grad_cam(image_index, test_dataset, cam, device, prediction=None):
 

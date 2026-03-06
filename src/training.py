@@ -17,7 +17,10 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 
 #-----------------------------------#
-# This file contains the training function for the two phases of the training pipeline
+# This file contains the core training loop for the model.
+# It handles the forward pass, loss computation, backpropagation, 
+# and metric tracking (accuracy, precision, recall, loss) across 
+# both the training and validation phases of the pipeline.
 
 # TRAINING LOOP
 def training_loop(model, train_loader, val_loader, epochs, threshold, criterion, optimizer, device):
