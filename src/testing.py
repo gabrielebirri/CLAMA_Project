@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 import copy
+import torch
 
 # PyTorch
 import torch
@@ -18,7 +19,7 @@ from torchvision import datasets, transforms, models
 #-----------------------------------#
 # This function is used to test the model on the test dataset
 def testing_model(test_model, test_loader, threshold, criterion, device):
-    test_model.eval()
+    test_model.eval()                   # Set the model to evaluation mode
 
     test_loss = 0
     correct = 0
@@ -61,14 +62,16 @@ def testing_model(test_model, test_loader, threshold, criterion, device):
 
 
 #-----------------------------------#
-# This function is used to inference the model given an image
+# This function is used to inference the model for a given image
 def inference(model, image, sensitivity):
-    pred = model(image)
-    prob = torch.sigmoid(pred)
-    if prob > sensitivity:
-        prediction = "Malignant"
-    else:
-        prediction = "Benign"
+    model.eval()                        # Set the model to evaluation mode
+    with torch.inference_mode():        # Set the context for inference
+        pred = model(image)
+        prob = torch.sigmoid(pred)
+        if prob > sensitivity:
+            prediction = "Malignant"
+        else:
+            prediction = "Benign"
     
     print(f"Model prediction: {prediction}")
     return prediction
