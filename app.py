@@ -12,15 +12,24 @@ st.set_page_config(page_title="ADAS", layout="wide")
 st.title("Advanced Dermatological Assistance System")
 st.write("Deep Learning for skin cancer detection")
 
+st.error("⚠️ **Disclaimer:** This application is a university project developed for educational purposes. It is **not** a medical diagnostic device and should not be used for clinical decision-making or diagnosis.")
+
+
 # --- SIDEBAR: Configurazione ---
-st.sidebar.header("Configurazione")
-model_name = st.sidebar.selectbox(
+st.sidebar.header("Model configuration")
+
+model_options = {
+    "effnet_2.pth": "EfficientNet",
+    "densenet_best_5.pth": "DenseNet121"
+}
+
+selected_weights = st.sidebar.selectbox(
     "Select the Model",
-    ("EfficientNet", "ResNet50", "DenseNet121")
+    list(model_options.keys())
 )
 
-# Load weights Path
-weights_path = st.sidebar.text_input("Path to .pth file", "models/best_model.pth")
+model_name = model_options[selected_weights]
+weights_path = f"models/{selected_weights}"
 
 # Loading image
 uploaded_file = st.file_uploader("Upload a dermatoscopic image (JPG/PNG)", type=["jpg", "jpeg", "png"])
@@ -28,11 +37,6 @@ uploaded_file = st.file_uploader("Upload a dermatoscopic image (JPG/PNG)", type=
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert('RGB')
     
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.image(image, caption="Original Image", use_column_width=True)
-
     if st.button("Analyze"):
         with st.spinner('Analyzing...'):
             if torch.backends.mps.is_available():
@@ -58,27 +62,26 @@ if uploaded_file is not None:
             sensitivity = 0.2
             
             prediction = inference(model, image_tensor, sensitivity)
-            label = "MALIGNO" if prediction == "Malignant" else "BENIGNO"
+            label = "MALIGNANT" if prediction == "Malignant" else "BENIGN"
 
-            with col2:
-                st.subheader("Risultato")
-                color = "red" if label == "MALIGNO" else "green"
-                st.markdown(f"Diagnosi suggerita: **:{color}[{label}]**")
+            st.subheader("Results")
+            color = "red" if label == "MALIGNANT" else "green"
+            st.markdown(f"Suggested diagnosis: **:{color}[{label}]**")
 
-                # 3. Visualizzazione Grad-CAM
-                st.subheader("Visualizzazione Grad-CAM")
+            # 3. Visualizzazione Grad-CAM
+            st.subheader("Grad-CAM Visualization")
+            
+            with st.spinner("Generating Grad-CAM..."):
+                cam = grad_cam_setup(weights_path, device)
+                dummy_dataset = [(image_tensor.squeeze(0), 0)]
                 
-                with st.spinner("Generazione Grad-CAM..."):
-                    cam = grad_cam_setup(weights_path, device)
-                    dummy_dataset = [(image_tensor.squeeze(0), 0)]
-                    
-                    fig = plt.figure(figsize=(10, 5))
-                    original_show = plt.show
-                    plt.show = lambda: None  # Evita che plt.show() blocchi o pulisca la figura in Streamlit
-                    
-                    try:
-                        show_grad_cam(0, dummy_dataset, cam, device, prediction=prediction)
-                        st.pyplot(fig)
-                    finally:
-                        plt.show = original_show
-                        plt.close(fig)
+                fig = plt.figure(figsize=(10, 5))
+                original_show = plt.show
+                plt.show = lambda: None  # Evita che plt.show() blocchi o pulisca la figura in Streamlit
+                
+                try:
+                    show_grad_cam(0, dummy_dataset, cam, device, prediction=prediction)
+                    st.pyplot(fig)
+                finally:
+                    plt.show = original_show
+                    plt.close(fig)
