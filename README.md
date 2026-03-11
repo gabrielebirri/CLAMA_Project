@@ -1,3 +1,13 @@
+---
+title: ADAS - Melanoma Detection
+emoji: 🩺
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: 4.0.0
+app_file: app.py
+pinned: false
+---
 # Advanced Dermatological Assistance System
 
 ### Disclaimer: this is a university project and it's NOT intended to be a diagnostic device.
