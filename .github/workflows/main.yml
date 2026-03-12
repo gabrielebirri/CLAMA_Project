@@ -12,4 +12,4 @@ jobs:
       - name: Push to HF
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://bibri04:$HF_TOKEN@huggingface.co/spaces/bibri04/ADAShf main
+        run: git push --force https://bibri04:$HF_TOKEN@huggingface.co/spaces/bibri04/ADAShf HEAD:main
