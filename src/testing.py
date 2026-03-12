@@ -63,15 +63,22 @@ def testing_model(test_model, test_loader, threshold, criterion, device):
 
 #-----------------------------------#
 # This function is used to inference the model for a given image
-def inference(model, image, sensitivity):
+def inference(model, image, sensitivity, return_prob=False):
     model.eval()                        # Set the model to evaluation mode
     with torch.inference_mode():        # Set the context for inference
         pred = model(image)
         prob = torch.sigmoid(pred)
         if prob > sensitivity:
-            prediction = "Malignant"
+            prediction = 1
         else:
-            prediction = "Benign"
-    
-    print(f"Model prediction: {prediction}")
+            prediction = 0
+        
+        # Converting prediction to label
+        if prediction == 1:
+            label = "Malignant"
+        else:
+            label = "Benign"
+    print(f"Model prediction: {label}")
+    if return_prob:
+        return prediction, prob.item()
     return prediction

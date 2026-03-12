@@ -39,13 +39,14 @@ def analyze_image(image, selected_weights):
     ])
     image_tensor = transform_pipeline(image).unsqueeze(0).to(device)
 
-    sensitivity = 0.2
+    sensitivity = 0.5
     
-    prediction = inference(model, image_tensor, sensitivity)
-    label = "MALIGNANT" if prediction == "Malignant" else "BENIGN"
+    prediction, prob = inference(model, image_tensor, sensitivity, return_prob=True)
+    label = "MALIGNANT" if prediction == 1 else "BENIGN"
     
     color = "red" if label == "MALIGNANT" else "green"
-    diagnosis_html = f"Suggested diagnosis: <strong style='color:{color}; font-size: 1.2em;'>{label}</strong>"
+    prob_percentage = f"{prob * 100:.2f}%"
+    diagnosis_html = f"Suggested diagnosis: <strong style='color:{color}; font-size: 1.2em;'>{label}</strong><br>Probability: <strong>{prob_percentage}</strong>"
 
     # Grad-CAM Visualization
     cam = grad_cam_setup(weights_path, device)
@@ -56,7 +57,7 @@ def analyze_image(image, selected_weights):
     plt.show = lambda: None  # Prevent plt.show() from blocking or clearing the figure in Gradio
     
     try:
-        show_grad_cam(0, dummy_dataset, cam, device, prediction=prediction)
+        show_grad_cam(0, dummy_dataset, cam, device, prediction=label.capitalize())
     finally:
         plt.show = original_show
         
@@ -69,7 +70,7 @@ with gr.Blocks(title="ADAS") as demo:
     
     gr.HTML("""
     <div style="background-color: #ffebee; border: 1px solid #f44336; padding: 15px; border-radius: 8px; color: #b71c1c; margin-bottom: 20px;">
-        ⚠️ <strong>Disclaimer:</strong> This application is a university project developed for educational purposes. It is <strong>not</strong> a medical diagnostic device and should not be used for clinical decision-making or diagnosis.
+        ⚠️ <strong style='color: red;'>Disclaimer:</strong> This application is a university project developed for educational purposes. It is <strong style='color: red;'>NOT</strong> a medical diagnostic device and should not be used for clinical decision-making or diagnosis.
     </div>
     """)
     
