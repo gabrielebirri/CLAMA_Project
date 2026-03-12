@@ -6,6 +6,11 @@ from torchvision import transforms
 from src.utils import build_chosen_model, imagenet_mean, imagenet_std
 from src.testing import inference
 from src.gradcam import grad_cam_setup, show_grad_cam
+from huggingface_hub import hf_hub_download
+
+# Hugging Face Repository Configuration
+# Repo ID
+HF_REPO_ID = "bibri04/ADAS_models"
 
 def analyze_image(image, selected_weights):
     if image is None:
@@ -17,7 +22,11 @@ def analyze_image(image, selected_weights):
     }
     
     model_name = model_options[selected_weights]
-    weights_path = f"models/{selected_weights}"
+    
+    try:
+        weights_path = hf_hub_download(repo_id=HF_REPO_ID, filename=selected_weights, local_dir="models")
+    except Exception as e:
+        return f"<strong style='color:red;'>Failed to download model weights from Hugging Face: {e}</strong>", None
     
     if torch.backends.mps.is_available():
         device = torch.device('mps')
