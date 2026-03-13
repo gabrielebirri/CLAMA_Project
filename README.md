@@ -28,7 +28,7 @@ The study utilizes a dataset of approximately 10,000 dermoscopic images, sourced
 
 **Dataset used:** https://www.kaggle.com/datasets/hasnainjaved/melanoma-skin-cancer-dataset-of-10000-images
 
-## Model repository
+## Models repository
 All the trained models are available freely on Hugging Face Model Hub. To view and download the models click on the link below:
 
 https://huggingface.co/spaces/bibri04/ADAS_models
@@ -42,39 +42,56 @@ The pipeline is designed to be hybrid, in order to be able to both run locally a
 
 ### HOW TO RUN LOCALLY
 
-### 1. Check Python version
-This project has been designed to be able to run on Python 3.10.19. If you have another version installed some libraries may not work. To check for the Python version run the following code in terminal:
+**1. Clone the repository**
+
+To clone the repository run the following command in terminal:
 
 <pre>
-python --version
+git clone https://github.com/bibri04/ADAS.git
 </pre>
 
-### 2. Create and activate a virtual environment
-It's best practice to create a virtual environment to avoid conflicts between libraries. The best way to do so is by downloading **Anaconda** and create an environment via conda. When you have created the environment (example: my_env), remember to activate it:
+
+**2. Create and activate a virtual environment**
+
+It's best practice to create a virtual environment to avoid conflicts between libraries. The best way to do so is by installing **Anaconda** and creating an environment via conda. When you have created the environment (example: my_env), remember to activate it:
+
+<pre>
+conda create -n my_env python=3.10.19
+</pre>
 
 <pre>
 conda activare my_env
 </pre>
 
-### 3. Install required dependancies
-To install required libraries, run the following line in the terminal, it will automatically download and install all you need in the vortual environment:
+**3. Check Python version**
+
+This project has been designed to run on Python 3.10.19. If you have another version installed some libraries may not work. To check for the Python version run the following code in terminal:
+
+<pre>
+python --version
+</pre>
+
+**4. Install required dependancies**
+
+To install required libraries, run the following line in the terminal, it will automatically download and install all you need in the virtual environment:
 
 <pre>
 pip install -r requirements.txt
 </pre>
 
-### 4. Run the pipeline
+**5. Run the pipeline**
+
 This project is built with simplicity at its core. The entire workflow is managed through a Jupyter Notebook for an intuitive experience.To execute the training and testing pipeline, simply open **Pipeline_Driver.ipynb** and follow the step-by-step instructions provided within the cells.
 
 ### HOW TO RUN ON COLAB
 
 The workflow to run the pipeline on Google Colab is much simpler and automated.
 
-### 1. Open Pipeline_Driver.ipynb
+**1. Open Pipeline_Driver.ipynb**
 
-### 2. Click on the Colab badge above the title
+**2. Click on the Colab badge above the title**
 
-### 3. Run the notebook as locally
+**3. Run the notebook as locally**
 
 NOTE: sometimes Colab gives an error after downloading the dataset. If this happens wait for a minute and run the downloading cell again. This happens because the cache has still to update, therefore the following cells of the notebook don't find the dataset material yet
 

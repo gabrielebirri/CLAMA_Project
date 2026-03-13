@@ -108,7 +108,8 @@ with gr.Blocks(title="ADAS") as demo:
         with gr.Column(scale=2):
             gr.Markdown("### Results")
             diagnosis_output = gr.HTML()
-            gr.Markdown("### Grad-CAM Visualization")
+            gr.Markdown("### Grad-CAM")
+            gr.Markdown("<i>Grad-CAM is a technique that helps to visualize the regions of the image that the model is focusing on to make its prediction.</i>")
             gradcam_output = gr.Plot()
             
     analyze_btn.click(
