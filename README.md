@@ -31,7 +31,7 @@ The study utilizes a dataset of approximately 10,000 dermoscopic images, sourced
 ## Models repository
 All the trained models are available freely on Hugging Face Model Hub. To view and download the models click on the link below:
 
-https://huggingface.co/spaces/bibri04/ADAS_models
+https://huggingface.co/bibri04/ADAS_models
 
 A detailed explanation model performance and architecture (hyper-parameters, training strategy, etc.) can be found in the [model repository README](https://huggingface.co/spaces/bibri04/ADAS_models/blob/main/README.md) (It will be updated soon).
 

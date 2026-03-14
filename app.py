@@ -3,7 +3,7 @@ import torch
 from PIL import Image
 import matplotlib.pyplot as plt
 from torchvision import transforms
-from src.utils import build_chosen_model, imagenet_mean, imagenet_std
+from src.utils import build_chosen_model, imagenet_mean, imagenet_std, model_types, models_names, default_model
 from src.testing import inference
 from src.gradcam import grad_cam_setup, show_grad_cam
 from huggingface_hub import hf_hub_download
@@ -16,12 +16,7 @@ def analyze_image(image, selected_weights):
     if image is None:
         return "<strong style='color:red;'>Please upload an image first.</strong>", None
         
-    model_options = {
-        "effnet_2.pth": "EfficientNet",
-        "densenet_best_5.pth": "DenseNet121"
-    }
-    
-    model_name = model_options[selected_weights]
+    model_name = model_types[selected_weights]
     
     try:
         weights_path = hf_hub_download(repo_id=HF_REPO_ID, filename=selected_weights, local_dir="models")
@@ -98,9 +93,9 @@ with gr.Blocks(title="ADAS") as demo:
         with gr.Column(scale=1):
             gr.Markdown("### Model configuration")
             model_dropdown = gr.Dropdown(
-                choices=["effnet_2.pth", "densenet_best_5.pth"],
-                value="effnet_2.pth",
-                label="Select the Model"
+                choices=models_names,
+                value=default_model,
+                label="Select the model"
             )
             image_input = gr.Image(type="pil", label="Upload a dermatoscopic image (JPG/PNG)")
             analyze_btn = gr.Button("Analyze", variant="primary")

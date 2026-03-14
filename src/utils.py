@@ -18,6 +18,14 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
 
 #-----------------------------------#
+# MODELS DITCIONARY
+model_types = {
+    "effnet_2.pth": "EfficientNet",
+    "densenet_best_5.pth": "DenseNet121",
+}
+models_names = list(model_types.keys())
+default_model = "effnet_2.pth"
+
 # List of valid models in this project
 valid_models = {"DenseNet121", "EfficientNet", "ResNet50"}
 
@@ -118,6 +126,7 @@ def download_dataset(IN_COLAB):
 
 #-----------------------------------#
 # This function helps choosing the model and building it
+# This function is designed to be modular so if a new model is added, it can be quickly implemented
 def build_chosen_model(model_name):
     # Downloading and preparing the model
     if model_name == "DenseNet121":
