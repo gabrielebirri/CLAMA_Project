@@ -9,9 +9,10 @@ torch.manual_seed(42)
 
 train_transform = transforms.Compose([
     transforms.Resize((224, 224)),
+    transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.02),
     transforms.RandomHorizontalFlip(),
     transforms.RandomVerticalFlip(),
-    transforms.RandomRotation(30),
+    transforms.RandomRotation(180),
     transforms.ToTensor(),
     transforms.Normalize(
         mean=imagenet_mean,

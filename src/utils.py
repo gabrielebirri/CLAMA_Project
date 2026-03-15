@@ -20,11 +20,12 @@ from torchvision import datasets, transforms, models
 #-----------------------------------#
 # MODELS DITCIONARY
 model_types = {
+    "effnet_3.pth": "EfficientNet",
     "effnet_2.pth": "EfficientNet",
     "densenet_best_5.pth": "DenseNet121",
 }
 models_names = list(model_types.keys())
-default_model = "effnet_2.pth"
+default_model = "effnet_3.pth"
 
 # List of valid models in this project
 valid_models = {"DenseNet121", "EfficientNet", "ResNet50"}

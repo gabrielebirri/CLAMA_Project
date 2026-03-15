@@ -50,7 +50,7 @@ def analyze_image(image, selected_weights):
     
     color = "red" if label == "MALIGNANT" else "green"
     prob_percentage = f"{prob * 100:.2f}%"
-    diagnosis_html = f"Suggested diagnosis: <strong style='color:{color}; font-size: 1.2em;'>{label}</strong><br>Probability: <strong>{prob_percentage}</strong>"
+    diagnosis_html = f"Suggested diagnosis: <strong style='color:{color}; font-size: 1.2em;'>{label}</strong><br>Estimated probability of malignancy: <strong>{prob_percentage}</strong>"
 
     # Grad-CAM Visualization
     cam = grad_cam_setup(weights_path, device)
@@ -102,6 +102,7 @@ with gr.Blocks(title="ADAS") as demo:
             
         with gr.Column(scale=2):
             gr.Markdown("### Results")
+            gr.Markdown("<i>The sensitivity of the model is set to 0.5</i>")
             diagnosis_output = gr.HTML()
             gr.Markdown("### Grad-CAM")
             gr.Markdown("<i>Grad-CAM is a technique that helps to visualize the regions of the image that the model is focusing on to make its prediction.</i>")
